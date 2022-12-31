@@ -3,6 +3,7 @@ const app = express();
 require('dotenv').config();
 
 const userRouter = require('./routes/userRoutes')
+const messageRouter = require('./routes/messageRoute')
 
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
@@ -25,6 +26,7 @@ app.use(cors())
 
 //routes
 app.use('/api/auth', userRouter)
+app.use('/api/messages', messageRouter )
 
 
 app.get('/', (req, res) => {
