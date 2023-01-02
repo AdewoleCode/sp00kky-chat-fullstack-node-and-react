@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { allUsersRoute, host } from "../utils/APIRoutes";
 import ChatContainer from "../components/ChatContainer";
+
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
-
 import "./Chat.css"
 
 export default function Chat() {
