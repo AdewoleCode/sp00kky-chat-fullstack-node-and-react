@@ -43,7 +43,7 @@ app.use(errorHandlerMiddleware);
 
 
 
-const port = process.env.PORT || 3030;
+const port = process.env.PORT || 3000;
 
 
 //conect to mongodb and start server
@@ -51,39 +51,41 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI)
     console.log('connected');
-    const server = app.listen(port, () =>
-      console.log(`Server is listening on port ${port}...`)
-    );
-
-
-    const io = socket(server, {
-      cors: {
-        origin: "http://localhost:3000",
-        credentials: true
-      }
-    })
-
-    global.onlineUsers = new Map()
-
-    io.on("connection", (socket)=> {
-      global.chatSocket = socket
-      socket.on("add-user", (userId)=> {
-        onlineUsers.set(userId, socket.id)
-      })
-    })
-
-    socket.on('send-msg', (data)=> {
-      const sendUserSocket = onlineUsers.get(data.to)
-      if (sendUserSocket){
-        socket.to(sendUserSocket).emit("msg-recieve", data.msg)
-      }
-    })
-
 
   } catch (error) {
     console.log(error);
   }
 };
 
+const server = app.listen(port, () =>
+console.log(`Server is listening on port ${port}...`)
+);
 
 start();
+
+const io = socket(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    credentials: true
+  }
+})
+
+global.onlineUsers = new Map()
+
+io.on("connection", (socket)=> {
+  global.chatSocket = socket
+  socket.on("add-user", (userId)=> {
+    onlineUsers.set(userId, socket.id)
+  })
+
+  socket.on('send-msg', (data)=> {
+    const sendUserSocket = onlineUsers.get(data.to)
+    if (sendUserSocket){
+      socket.to(sendUserSocket).emit("msg-recieve", data.msg)
+    }
+  })
+
+})
+
+
+
