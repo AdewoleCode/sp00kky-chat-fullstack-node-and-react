@@ -9,7 +9,6 @@ const { StatusCodes } = require("http-status-codes");
 
 const register = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { username, password, email } = req.body;
 
     if (!email || !password || !username) {
@@ -51,7 +50,6 @@ const register = async (req, res, next) => {
 
 const login = async (req, res) => {
   try {
-    console.log(req.body);
     const { username, password, email } = req.body;
 
     const user = await UserModel.findOne({ username });
