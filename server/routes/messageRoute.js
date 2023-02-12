@@ -4,7 +4,7 @@ const router = express.Router()
 const { getMsg, createMsg } = require('../controllers/messageController')
 
 
-router.route('/getmessage').get(getMsg)
+router.route('/getmessage').post(getMsg)
 router.route('/createmessage').post(createMsg)
 
 

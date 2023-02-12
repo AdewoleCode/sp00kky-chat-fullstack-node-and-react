@@ -6,7 +6,7 @@ const {
 } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 
-const createMsg = async (req, res, next) => {
+const createMsg = async (req, res) => {
   try {
     // console.log(req.body);
     const { from, to, message } = req.body;
@@ -23,7 +23,7 @@ const createMsg = async (req, res, next) => {
   }
 };
 
-const getMsg = async (req, res, next) => {
+const getMsg = async (req, res) => {
   // console.log(req.body);
   try {
     const {from, to} = req.body

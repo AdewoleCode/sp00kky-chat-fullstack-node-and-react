@@ -29,7 +29,6 @@ app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 3030;
 
-//conect to mongodb and start server
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
