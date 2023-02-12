@@ -75,7 +75,6 @@ export default function SetAvatar() {
         // console.log(response.data);
         // console.log(data);
         // console.log(data[1]);
-        console.log(avatars[selectedAvatar])
       }
       setAvatars(data)
       setIsLoading(false)

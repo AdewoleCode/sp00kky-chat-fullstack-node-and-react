@@ -4,6 +4,7 @@ import Logout from "../logout/Logout";
 import { ChatInput } from "../chatInput/ChatInput";
 import axios from "axios";
 import { getAllMessagesRoute, sendMessageRoute } from "../../utils/APIRoutes";
+import {v4 as uuidv4} from "uuid"
 
 export default function ChatContainer({ currentContactChat, currentUser, socket }) {
 
@@ -16,11 +17,14 @@ export default function ChatContainer({ currentContactChat, currentUser, socket 
   }, [currentContactChat])
 
   const fetchAllMessages = async () => {
-    const response = await axios.post(getAllMessagesRoute, {
-      from: currentUser._id,
-      to: currentContactChat._id
-    })
-    setChatMsg(response.data.projectMessages)
+    if (currentContactChat) {
+      const response = await axios.post(getAllMessagesRoute, {
+        from: currentUser._id,
+        to: currentContactChat._id
+      })
+      setChatMsg(response.data.projectMessages)
+
+    }
   }
 
   const handleSendMsg = async (msg) => {
@@ -35,13 +39,13 @@ export default function ChatContainer({ currentContactChat, currentUser, socket 
       message: msg
     })
     const msgs = [...chatMsg]
-    msgs.push({fromSelf: true, message: msg})
+    msgs.push({ fromSelf: true, message: msg })
     setChatMsg(msgs)
   }
 
-  useEffect(()=> {
-    if(socket.current){
-      socket.current.on("msg-recieve", (msg)=> {
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieve", (msg) => {
         setArrivalMessage({ fromSelf: false, message: msg })
       })
     }
@@ -56,7 +60,6 @@ export default function ChatContainer({ currentContactChat, currentUser, socket 
   }, [chatMsg]);
 
 
-console.log(chatMsg);
 
   return (
     <div className="chat-box">
@@ -78,17 +81,16 @@ console.log(chatMsg);
         <h1>messages</h1>
         {chatMsg?.map((message) => {
           return (
-            // <div ref={scrollRef} key={uuidv4()}>
-              <div
-                className={`message ${
-                  message.fromSelf ? "sent" : "recieved"
+            <div ref={scrollRef} key={uuidv4()}>
+            <div
+              className={`message ${message.fromSelf ? "sent" : "recieved"
                 }`}
-              >
-                <div className="content ">
-                  <p>{message?.message}</p>
-                </div>
+            >
+              <div className="content ">
+                <p>{message?.message}</p>
               </div>
-            // </div>
+            </div>
+             </div>
           );
         })}
       </div>
