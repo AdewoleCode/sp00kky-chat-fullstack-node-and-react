@@ -85,26 +85,15 @@ export default function SetAvatar() {
     }
   }
 
-  // useEffect(async () => {
-  //   const data = [];
-  //   for (let i = 0; i < 4; i++) {
-  //     const image = await axios.get(
-  //       `${api}/${Math.round(Math.random() * 1000)}`
-  //     );
-  //     const buffer = new Buffer(image.data);
-  //     data.push(buffer.toString("base64"));
-  //   }
-  //   setAvatars(data);
-  //   setIsLoading(false);
-  // }, []);
+
   return (
     <>
       {isLoading ? (
-        <div className="container">
+        <div className="avatar-container">
           <img src={loader} alt="loader" className="loader" />
         </div>
       ) : (
-        <div className="container">
+        <div className="avatar-container">
           <div className="title-container">
             <h1>Pick an Avatar as your profile picture</h1>
           </div>

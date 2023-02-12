@@ -3,10 +3,10 @@ import Logo from "../assets/logo.svg";
 import "./Contact.css"
 
 
-export default function Contacts({ contacts, changeChat }) {
+export default function Contacts({ contacts, changeContact }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
-  const [currentSelected, setCurrentSelected] = useState(undefined);
+  const [currentSelectedContact, setCurrentSelectedContact] = useState(undefined);
 
 
   useEffect( () => {
@@ -22,10 +22,13 @@ export default function Contacts({ contacts, changeChat }) {
 
   }
 
-  const changeCurrentChat = (index, contact) => {
-    setCurrentSelected(index);
-    changeChat(contact);
+  const changeSelectedContact = (index, contact) => {
+    setCurrentSelectedContact(index);
+    changeContact(contact);
+    console.log(contact);
+
   };
+
 
   return (
     <>
@@ -41,9 +44,9 @@ export default function Contacts({ contacts, changeChat }) {
                 <div
                   key={contact._id}
                   className={`contact ${
-                    index === currentSelected ? "selected" : ""
+                    index === currentSelectedContact ? "selected" : ""
                   }`}
-                  onClick={() => changeCurrentChat(index, contact)}
+                  onClick={() => changeSelectedContact(index, contact)}
                 >
                   <div className="avatar">
                     <img

@@ -2,22 +2,37 @@ import React, { useState, useEffect, useRef } from "react";
 import "../components/Chatbox.css"
 import Logout from "./Logout";
 import { ChatInput } from "./chatInput/ChatInput";
+import axios from "axios";
+import { getAllMessagesRoute, sendMessageRoute } from "../utils/APIRoutes";
 
-export default function ChatContainer({ currentChat, socket }) {
+export default function ChatContainer({ currentContactChat, currentUser, socket }) {
 
-
+  const [chatMsg, setChatMsg] = useState([])
 
   useEffect(() => {
-    getCurrentChat();
-  }, [currentChat]);
+    fetchAllMessages()
+  }, [currentContactChat])
 
-  const getCurrentChat = async () => {
-    if (currentChat) {
-      await JSON.parse(
-        localStorage.getItem("chat-app-user")
-      )._id;
-    }
-  };
+  const fetchAllMessages = async () => {
+    const response = await axios.post(getAllMessagesRoute, {
+      from: currentUser._id,
+      to: currentContactChat._id
+    })
+    setChatMsg(response.data)
+    console.log(response.data);
+  }
+
+  const handleSendMsg = async (msg) => {
+    await axios.post(sendMessageRoute, {
+      from: currentUser._id,
+      to: currentContactChat._id,
+      message: msg
+    })
+    console.log(msg);
+  }
+
+  console.log(currentUser.username, currentContactChat.username);
+
 
   return (
     <div className="chat-box">
@@ -25,12 +40,12 @@ export default function ChatContainer({ currentChat, socket }) {
         <div className="user-details">
           <div className="avatar">
             <img
-              src={`data:image/svg+xml;base64, ${currentChat.avatarImage} `}
+              src={`data:image/svg+xml;base64, ${currentContactChat.avatarImage} `}
               alt="contact"
             />
           </div>
           <div className="username">
-            <h3>{currentChat.username}</h3>
+            <h3>{currentContactChat.username}</h3>
           </div>
         </div>
         <Logout />
@@ -54,7 +69,7 @@ export default function ChatContainer({ currentChat, socket }) {
         })} */}
       </div>
       <div className="chat-input-container">
-        <ChatInput />
+        <ChatInput handleSendMsg={handleSendMsg} />
       </div>
     </div>
   );

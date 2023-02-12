@@ -13,7 +13,7 @@ export default function Chat() {
   const navigate = useNavigate();
   const socket = useRef();
   const [contacts, setContacts] = useState([]);
-  const [currentChat, setCurrentChat] = useState(undefined);
+  const [currentContactChat, setCurrentContactChat] = useState(undefined);
   const [currentUser, setCurrentUser] = useState(undefined);
 
 
@@ -33,18 +33,12 @@ export default function Chat() {
     }
   }
 
+  console.log(currentUser);
 
-
-  // useEffect(() => {
-  //   if (currentUser) {
-  //     socket.current = io(host);
-  //     socket.current.emit("add-user", currentUser._id);
-  //   }
-  // }, [currentUser]);
 
   useEffect(() => {
     getAndSetContacts()
-  }, [currentUser]);
+  }, [currentUser]); 
 
   
   const getAndSetContacts = async ()=> {
@@ -60,8 +54,9 @@ export default function Chat() {
   }
 
 
-  const handleChatChange = (chat) => {
-    setCurrentChat(chat);
+  const handleContactChange = (contact) => {
+    setCurrentContactChat(contact);
+    console.log(contact);
   };
 
 
@@ -69,11 +64,11 @@ export default function Chat() {
     <>
       <div className="chat-container">
         <div className="container-1">
-          <Contacts contacts={contacts} changeChat={handleChatChange} />
-          {currentChat === undefined ? (
+          <Contacts contacts={contacts} changeContact={handleContactChange} />
+          {currentContactChat === undefined ? (
             <Welcome />
           ) : (
-            <ChatContainer currentChat={currentChat} socket={socket} />
+            <ChatContainer currentContactChat={currentContactChat} currentUser={currentUser} socket={socket} />
           )}
         </div>
       </div>

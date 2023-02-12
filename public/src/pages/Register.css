@@ -27,7 +27,7 @@ h1 {
     text-transform: uppercase;
 }
 
-form {
+.form-container form {
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
