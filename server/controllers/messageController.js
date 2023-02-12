@@ -8,7 +8,7 @@ const { StatusCodes } = require("http-status-codes");
 
 const createMsg = async (req, res, next) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const { from, to, message } = req.body;
     const data = await MessageModel.create({
       message: { text: message },
@@ -24,7 +24,7 @@ const createMsg = async (req, res, next) => {
 };
 
 const getMsg = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const {from, to} = req.body
     const messages = await MessageModel.find({

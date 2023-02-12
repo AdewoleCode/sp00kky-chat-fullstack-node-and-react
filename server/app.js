@@ -15,32 +15,15 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const socket = require("socket.io");
 
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
 
 //routes
 app.use("/api/auth", userRouter);
 app.use("/api/messages", messageRouter);
-
-// app.get('/', (req, res) => {
-//     res.send('homepage')
-//     console.log("hello");
-// })
-
-app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Max-Age", "1800");
-  res.setHeader("Access-Control-Allow-Headers", "content-type");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-  );
-});
-
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
@@ -64,7 +47,7 @@ start();
 
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3030",
+    origin: "http://localhost:3000",
     credentials: true,
   },
 });

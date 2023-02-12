@@ -81,8 +81,8 @@ const login = async (req, res) => {
 
 const setAvatar = async (req, res, next) => {
   try {
-    console.log(req.body);
-    console.log(req.params.id);
+    // console.log(req.body);
+    // console.log(req.params.id);
     const userId = req.params.id;
     const userImage = req.body.image;
 
@@ -102,7 +102,7 @@ const setAvatar = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    console.log(req.params);
+    // console.log(req.params);
     const users = await UserModel.find({ _id: { $ne: req.params.id } }).select([
       "email",
       "username",
@@ -115,4 +115,15 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, setAvatar, getAllUsers };
+
+const logOut = async (req, res, next) => {
+  try {
+    if (!req.params.id) return res.json({ msg: "User id is required " });
+    onlineUsers.delete(req.params.id);
+    return res.status(200).send();
+  } catch (ex) {
+    next(ex);
+  }
+};
+
+module.exports = { register, login, setAvatar, getAllUsers, logOut };
