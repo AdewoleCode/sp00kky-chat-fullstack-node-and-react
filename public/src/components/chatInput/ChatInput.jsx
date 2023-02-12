@@ -38,7 +38,7 @@ export const ChatInput = ({handleSendMsg}) => {
             </div>
             <form className="input-form" onSubmit={(event) => sendChat(event)}>
                 <input type="text"
-                    placeholder="type your messages"
+                    placeholder="type your message..."
                     onChange={(e) => setMsg(e.target.value)}
                     value={msg} />
             </form>

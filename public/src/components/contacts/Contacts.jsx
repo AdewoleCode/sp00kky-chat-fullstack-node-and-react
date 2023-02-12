@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from "../assets/logo.svg";
+import Logo from "../../assets/logo.svg"
 import "./Contact.css"
 
 
@@ -25,8 +25,6 @@ export default function Contacts({ contacts, changeContact }) {
   const changeSelectedContact = (index, contact) => {
     setCurrentSelectedContact(index);
     changeContact(contact);
-    console.log(contact);
-
   };
 
 

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Robot from "../assets/robot.gif";
-export default function Welcome() {
+import Robot from "../../assets/robot.gif"
 
+export default function Welcome() {
   const [userName, setUserName] = useState("");
 
   useEffect( () => {
@@ -15,8 +15,6 @@ export default function Welcome() {
         localStorage.getItem("chat-app-user")
       ).username
     );
-
-
   }
   return (
     <Container>

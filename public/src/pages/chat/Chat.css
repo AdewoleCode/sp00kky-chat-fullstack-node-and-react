@@ -12,7 +12,8 @@
 
 .chat-container .container-1 {
     padding: 10px 30px;
-    height: 85vh;
+    /* height: 85vh; */
+    height: 90%;
     width: 90vw;
     background-color: #00000076;
     display: grid;

@@ -1,11 +1,13 @@
 .chat-input {
-    height: 60px;
+    /* height: 60px; */
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     padding: 0.5rem 1rem;
     gap: 1rem;
     position: relative;
+    margin-top: 10px;
 }
 
 .chat-input .emoji {
@@ -15,22 +17,22 @@
     display: flex;
 }
 
-.emoji-picker-react{
+.emoji-picker-react {
     position: relative;
     left: 10px;
-    bottom: 100px;
-        background-color: #080420;
-        box-shadow: 0 5px 10px #9a86f3;
-        border-color: #9a86f3;
+    bottom: 360px;
+    background-color: #080420;
+    box-shadow: 0 5px 10px #9a86f3;
+    border-color: #9a86f3;
 }
 
 
 
 .chat-input .emoji svg {
     font-size: 1.5rem;
-        color: #ffff00c8;
-        cursor: pointer;
-      
+    color: #ffff00c8;
+    cursor: pointer;
+
 }
 
 .chat-input .input-form {
@@ -42,7 +44,7 @@
     flex-basis: 8%;
 }
 
-.chat-input .input-button{
+.chat-input .input-button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,11 +53,10 @@
     padding: 0.5rem 1.2rem;
     border-radius: 5px;
     cursor: pointer;
-    
+
 }
 
-.chat-input .input-button svg{
+.chat-input .input-button svg {
     font-size: 1.4rem;
     color: white;
 }
-
