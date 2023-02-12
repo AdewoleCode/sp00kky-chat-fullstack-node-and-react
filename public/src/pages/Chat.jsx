@@ -35,12 +35,12 @@ export default function Chat() {
 
 
 
-  useEffect(() => {
-    if (currentUser) {
-      socket.current = io(host);
-      socket.current.emit("add-user", currentUser._id);
-    }
-  }, [currentUser]);
+  // useEffect(() => {
+  //   if (currentUser) {
+  //     socket.current = io(host);
+  //     socket.current.emit("add-user", currentUser._id);
+  //   }
+  // }, [currentUser]);
 
   useEffect(() => {
     getAndSetContacts()
@@ -51,7 +51,7 @@ export default function Chat() {
     if (currentUser) {
       if (currentUser.isAvatarImageSet) {
         const data = await axios.get(`${allUsersRoute}/${currentUser._id}`);
-        console.log(data);
+        // console.log(data);
         setContacts(data.data.users);
       } else {
         navigate("/setAvatar");

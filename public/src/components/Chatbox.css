@@ -1,0 +1,35 @@
+
+
+.chat-box{
+    border: 1px solid red;
+    height: 100%;
+  
+}
+
+.chat-header{
+    border: 1px solid rebeccapurple;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem;
+}
+
+.chat-box .user-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chat-box .avatar img {
+    height: 3rem;
+}
+
+.chat-box .username h3{
+    color: white
+}
+
+.chat-messages {
+    height: 72%;
+    border: 1px solid grey;
+}
+

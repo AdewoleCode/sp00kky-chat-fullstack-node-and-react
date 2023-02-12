@@ -9,22 +9,23 @@ export default function Contacts({ contacts, changeChat }) {
   const [currentSelected, setCurrentSelected] = useState(undefined);
 
 
-  useEffect(async () => {
+  useEffect( () => {
+    setUserAndImage()
+  }, []);
+
+  const setUserAndImage = async () => {
     const data = await JSON.parse(
       localStorage.getItem("chat-app-user")
     );
     setCurrentUserName(data.username);
     setCurrentUserImage(data.avatarImage);
-  }, []);
 
-
+  }
 
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
   };
-
-
 
   return (
     <>
@@ -35,7 +36,7 @@ export default function Contacts({ contacts, changeChat }) {
             <h3>spooky</h3>
           </div> 
           <div className="contacts">
-            {contacts.map((contact, index) => {
+            {contacts?.map((contact, index) => {
               return (
                 <div
                   key={contact._id}
