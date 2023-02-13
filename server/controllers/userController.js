@@ -7,7 +7,7 @@ const {
 } = require("../errors");
 const { StatusCodes } = require("http-status-codes");
 
-const register = async (req, res, next) => {
+const register = async (req, res ) => {
   try {
     const { username, password, email } = req.body;
 
@@ -50,7 +50,7 @@ const register = async (req, res, next) => {
 
 const login = async (req, res) => {
   try {
-    const { username, password, email } = req.body;
+    const { username, password } = req.body;
 
     const user = await UserModel.findOne({ username });
 
@@ -98,7 +98,7 @@ const setAvatar = async (req, res, next) => {
   }
 };
 
-const getAllUsers = async (req, res, next) => {
+const getAllUsers = async (req, res ) => {
   try {
     // console.log(req.params);
     const users = await UserModel.find({ _id: { $ne: req.params.id } }).select([
